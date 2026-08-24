@@ -43,5 +43,6 @@
             implementationClass="dev.gaphunter.correlationidpropagationcompanion.gutter.DroppedCorrelationIdLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider language="kotlin"
             implementationClass="dev.gaphunter.correlationidpropagationcompanion.gutter.DroppedCorrelationIdLineMarkerProvider"/>
+        <notificationGroup id="Correlation ID Propagation Companion" displayType="BALLOON"/>
     </extensions>
 </idea-plugin>
