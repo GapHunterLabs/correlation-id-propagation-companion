@@ -8,6 +8,7 @@ import com.intellij.psi.PsiElement
 import dev.gaphunter.correlationidpropagationcompanion.detect.JavaCorrelationFinder
 import dev.gaphunter.correlationidpropagationcompanion.detect.KotlinCorrelationFinder
 import dev.gaphunter.correlationidpropagationcompanion.model.CorrelationHit
+import dev.gaphunter.correlationidpropagationcompanion.review.ReviewPrompt
 
 class DroppedCorrelationIdLineMarkerProvider : LineMarkerProviderDescriptor(), DumbAware {
 
@@ -28,6 +29,10 @@ class DroppedCorrelationIdLineMarkerProvider : LineMarkerProviderDescriptor(), D
         for (element in elements) {
             val hit = hitsByElement[element] ?: continue
             result.add(buildMarker(hit))
+
+            val path = file.virtualFile?.path ?: continue
+            val lineNumber = file.viewProvider.document?.getLineNumber(element.textRange.startOffset) ?: -1
+            ReviewPrompt.recordHit(file.project, "$path:$lineNumber")
         }
     }
 
